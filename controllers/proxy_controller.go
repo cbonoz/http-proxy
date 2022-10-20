@@ -52,11 +52,11 @@ func ProxyRequest(c *gin.Context) {
 
 	defer resp.Body.Close()
 
-	var j interface{}
-	err = json.NewDecoder(resp.Body).Decode(&j)
+	var data interface{}
+	err = json.NewDecoder(resp.Body).Decode(&data)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(resp.StatusCode, gin.H{"data": j})
+	c.JSON(resp.StatusCode, data)
 }
