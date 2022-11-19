@@ -1,2 +1,5 @@
 .idea
 http-proxy
+.vscode
+.dccache
+__debug_bin

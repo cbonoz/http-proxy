@@ -46,6 +46,7 @@ func ProxyRequest(c *gin.Context) {
 			return
 		}
 		req.Body = io.NopCloser(bytes.NewBuffer(payload))
+		req.Header.Set("Content-Type", "application/json")
 	}
 
 	resp, err := client.Do(req)
