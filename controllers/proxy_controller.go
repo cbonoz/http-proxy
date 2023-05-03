@@ -47,6 +47,13 @@ func ProxyRequest(c *gin.Context) {
 		}
 		req.Body = io.NopCloser(bytes.NewBuffer(payload))
 		req.Header.Set("Content-Type", "application/json")
+		// Copy any x- prefixed headers
+		for k, v := range c.Request.Header {
+			if len(k) > 2 && (k[0:2] == "X-" || k[0:2] == "x-") {
+				req.Header.Set(k, v[0])
+			}
+		}
+
 	}
 
 	resp, err := client.Do(req)
